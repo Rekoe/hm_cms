@@ -1,0 +1,32 @@
+﻿* { padding:0; margin:0;}
+li { list-style:none;}
+.body { height:auto; background:#ff0000; }
+.panel { width:100%; max-width:600px; position:relative; float:left;}
+.vm { height: auto !important; max-width: 600px !important; border: none; float: left; width: 100%; }
+.dl1 { position:absolute; top:28%;  width:100%; text-align:center;}
+.dl1 li {  display:inline-block; width:40%;}
+.dl1 li img{ width:100%;}
+
+.dl2 { width:100%;position:absolute; top:92%; text-align:center;}
+.dl2 li { width:60%; display:inline-block; margin-top:4px;}
+.dl2 li img { width:100%;}
+
+.fl {position:absolute; top:38%;  width:100%; text-align:center; }
+.fl li { width:20%; display:inline-block; margin:2%;}
+.fl li img { width:100%;}
+.fl li a img { width:80%; margin-top:4px;}
+
+.swiper-container-1 { overflow: hidden; position: absolute; top:56%; left:0px; right:0px;}
+.swiper-container img {
+    width:100%; height:100%;height: auto !important; max-height:100%; max-width: 600px !important; border: none; float: left; width: 100%;}
+.swiper-pagination-1 { width:100%; position:absolute; top:72.5%; text-align:center; }
+.swiper-pagination-1 span { margin:0px 3px;  background:#fff;}
+.swiper-pagination-1 .swiper-pagination-bullet-active { background:#ff0000;}
+
+
+.swiper-container-2 { overflow: hidden; position: absolute; top:77%; left:0px; right:0px;}
+.swiper-container img {
+    width:100%; height:100%;height: auto !important; max-height:100%; max-width: 600px !important; border: none; float: left; width: 100%; height:5%;}
+.swiper-pagination-2 { width:100%; position:absolute; top:91%;  text-align:center;}
+.swiper-pagination-2 span { margin:0px 3px;  background:#fff;}
+.swiper-pagination-2 .swiper-pagination-bullet-active { background:#ff0000;}

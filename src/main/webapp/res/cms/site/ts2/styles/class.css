@@ -1,0 +1,30 @@
+﻿.fixs { width:182px; float:left;}
+
+.class .content { width:720px; float:right; background:#fff; padding:10px 40px; color:#333;}
+.class .content .addr {  text-align:right; color:#666; margin:5px 0px; width:auto; display:normal;}
+.class .content .nav { border-bottom:1px #30100b solid; float:left; width:100%;}
+.class .content .nav li {  width:140px; text-align:center; display:inline-block; float:left;}
+.class .content .nav li a { display:inline-block; width:90%; background:#30100b; color:#fff; padding:7px 0; margin-bottom:6px;}
+.class .content .nav .act {  border:1px #30100b solid; margin-bottom:-1px; border-bottom:1px #fff solid;}
+.class .content .nav .act a { background:#fff; color:#30100b;}
+
+.class .content .list { width:100%; display:none; margin:40px 0;}
+.class .content .list:first-child { display:block;}
+.class .content .list div { width:100%; text-align:center; background:#e4e4e4; height:40px; }
+.class .content .list div a { color:#6f050f; line-height:40px;}
+.class .content .list ul li { width:100%; float:left; border-bottom:1px #666 dashed; padding:7px 0;}
+.class .content .list ul li a,.content .list ul li label { float:left; color:#666; }
+.class .content .list ul li span { float:right;}
+
+.pager { text-align:center; background:#f1f1f1; float:left; width:100%; margin:20px 0;}
+.pager a { display:inline-block; margin:10px 5px;}
+
+.head{border-bottom:4px #dfdfdf solid; margin-bottom:30px;}
+.head h1 { font-size:30px; color:#000; float:left;}
+.head .addr { margin-top:20px; line-height:40px;}
+
+.content h2 { font-size:18px; font-weight:normal; color:#333; text-align:center;}
+.shard { text-align:center; margin:10px 0 20px 0;}
+.shard .jiathis_style { display:inline-block; }
+.author { text-align:center;}
+.des { color:#333; margin-top:20px;}

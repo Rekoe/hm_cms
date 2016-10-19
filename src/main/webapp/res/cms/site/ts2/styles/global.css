@@ -1,0 +1,25 @@
+﻿* { font-size:13px; font-family:'Microsoft YaHei'; color:#9b9c9c; padding:0; margin:0; line-height:20px; }
+a { text-decoration:none;}
+a img { border:none;}
+li { list-style:none;}
+
+.ST { font-family:宋体;}
+
+.border1 { border:1px #40484B solid;}
+.bg1 { background:#2C3033;}
+
+.fix {  width:182px;  position:fixed; top:50%; right:50%; margin-top:-150px; margin-right:620px; display:inline-block;}
+.fix_r {  width:182px;  position:fixed; top:50%; left:50%; margin-top:-150px; margin-left:520px; display:inline-block;}
+
+.row { width:100%; display:inline-block; margin-bottom:20px;}
+.text_ov {  text-overflow:ellipsis; overflow:hidden; display:block; white-space:nowrap;}
+
+.vido {  position:relative; width:100%; float:left; }
+.vido a{ position:absolute; top:-20px; right:-20px;}
+
+.footer { width: 100%; margin-top:100px; float: left; background: url(../images/12.jpg); height: 227px; min-width:1000px; }
+.footer .content { width: 1000px; margin: 30px auto 0px auto; padding-top: 30px; background: url(../images/24.png) no-repeat center top; text-align: center; }
+.footer .content div {width:100%; float:left; margin-bottom:35px;}
+.footer .content div select { float:right; padding:3px 5px; border:1px #ff7e00 solid; border-radius:4px;}
+.footer .content div select option { padding:3px 5px;}
+.footer .content p { width: 100%; text-align: center; line-height: 22px; color: #fff; font-size: 11px; }

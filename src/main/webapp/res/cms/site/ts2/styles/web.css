@@ -1,0 +1,52 @@
+﻿html, body { font-size: 13px; color: #808080; font-family: 'Microsoft YaHei'; background:url(../images/bg.jpg) no-repeat top center; height: 100%; float: left; width:100%; }
+* { padding: 0px; margin: 0px; line-height: 18px; }
+a { text-decoration: none; color: #808080; }
+a img { border: none; }
+li { list-style: none; }
+
+
+.main { width:935px; margin:0px auto;}
+.main .container { width:100%;  float:left; margin-top:360px; }
+
+.video { float:left; margin:0px 0px 0px 85px;}
+.link { width:100%; float:left; margin:80px 0px 0px 0px;}
+.link .qr { float:left; margin-right:20px;}
+.link ul { width:270px; float:left;}
+.role { width:100%; float:left; margin-top:30px; margin-bottom:20px;}
+.role .left { width:245px; position:relative; float:left;}
+.role .left div { width:100%; float:left; height:125px; overflow:hidden; margin-bottom:7px;}
+.role .left div table td { width:245px; height:125px;}
+.role .left ul { left:20px; top:100px; position:absolute;}
+.role .left ul li { width:14px; height:14px; margin-right:6px; border-radius:7px; background:#fff; display:inline-block; cursor:pointer;filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;}
+.role .left ul .selected {filter:alpha(opacity=100);
+	-moz-opacity:1;
+	-khtml-opacity: 1;
+	opacity: 1; }
+
+.role .right { width:680px; float:right; height:100%;}
+.role .right ul { width:100%; float:left;}
+.role .right ul li { float:left; margin-left:1px; cursor:pointer;}
+.role .right ul li img:last-child { display:none;}
+.role .right ul .selected img:first-child { display:none;}
+.role .right ul .selected img:last-child { display:block;}
+
+.vido {  position:relative; width:100%; float:left; }
+.vido a{ position:absolute; top:-20px; right:-20px;}
+
+.media { width:100%; float:left; margin-top:20px;}
+.media h1 { width:100%; float:left; font-weight:normal;}
+.mt{ width:100%; float:left; margin:13px 0px 50px 0px; height:123px; overflow:hidden;}
+.mt ul {  width:100%; float:left;}
+.mt ul li{ margin:0px 24px 5px 0px; width:161px; height:58px; float:left;}
+.mt ul li img{width:161px; height:58px;}
+
+.footer { width: 100%; float: left; background: url(../images/12.jpg); height: 227px; min-width:1000px; }
+.footer .content { width: 1000px; margin: 30px auto 0px auto; padding-top: 30px; background: url(../images/24.png) no-repeat center top; text-align: center; }
+.footer .content div {width:100%; float:left; margin-bottom:35px;}
+.footer .content div select { float:right; padding:3px 5px; border:1px #ff7e00 solid; border-radius:4px;}
+.footer .content div select option { padding:3px 5px;}
+.footer .content p { width: 100%; text-align: center; line-height: 22px; color: #fff; font-size: 11px; }
+
