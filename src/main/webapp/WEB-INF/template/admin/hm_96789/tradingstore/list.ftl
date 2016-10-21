@@ -13,9 +13,10 @@ function getTableForm() {
 <body>
 <div class="box-positon">
 	<div class="rpos"><@s.m "global.position"/>: 菜系 - <@s.m "global.list"/></div>
-	<form class="ropt">
+	<@p.form class="ropt">
+		<@p.hidden name="id" value="${id}"/>
 		<input class="add" type="submit" value="<@s.m "global.add"/>" onclick="this.form.action='add';"/>
-	</form>
+	</@p.form>
 	<div class="clear"></div>
 </div>
 <div class="body-box">

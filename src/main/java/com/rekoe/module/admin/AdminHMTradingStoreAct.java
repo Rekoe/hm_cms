@@ -29,4 +29,11 @@ public class AdminHMTradingStoreAct {
 		return hmTradingStoreService.getPagination(page, Cnd.where("restaurantInfoId", "=", id));
 	}
 
+	@At
+	@Ok("fm:template.admin.hm_96789.tradingstore.add")
+	@NutzRequiresPermissions(value = "admin.hm:tradingstore:add", name = "查看列表", tag = "商户商圈", enable = true)
+	public long add(@Param("id") long id) {
+		return id;
+	}
+
 }
