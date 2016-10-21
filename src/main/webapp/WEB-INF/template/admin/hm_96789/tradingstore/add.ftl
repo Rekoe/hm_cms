@@ -41,19 +41,22 @@ $().ready(function() {
 </div>
 <div class="body-box">
 <@p.form id="jvForm" action="o_save" labelWidth="10" method="post" onsubmit="return false;">
-	<@p.text label="菜系" id="resinf.name" name="resinf.name" required="true" class="required" maxlength="40"/><@p.tr/>
-	<@p.text label="拼音" id="resinf.pinyin" name="resinf.pinyin" required="true" class="required" maxlength="40"/><@p.tr/>
+	<@p.hidden name="tradingstore.restaurantInfoId" value="${id}"/>
+	<@p.text label="商圈" id="tradingstore.name" name="tradingstore.name" required="true" class="required" maxlength="40"/><@p.tr/>
+	<@p.text label="地址" id="tradingstore.addr" name="tradingstore.addr" required="true" class="required" maxlength="40"/><@p.tr/>
+	<@p.text label="电话" id="tradingstore.phone" name="tradingstore.phone" required="true" class="required" maxlength="40"/><@p.tr/>
+ 	<@p.textarea label="附近酒店" name="tradingstore.hotel" cols="50" rows="5" class="textbox required" />
  	<tr class="authorities">
 		<th width="15%" class="pn-flabel pn-flabel-h"><a href="javascript:;" class="selectAll" title="<@s.m "global.selectAll" />">菜系</a></th>
 		<td width="30%" class="pn-fcontent">
 			<span class="fieldSet">
-			<#list obj as cuisine>
-				<label><input value="${cuisine.id}" type="checkbox" name="resinf.cuisines[${cuisine_index}].id">${cuisine.name} </label>
+			<#list obj.cuisines as cuisine>
+				<label><input value="${cuisine.id}" type="checkbox" name="tradingstore.cuisines[${cuisine_index}].id">${cuisine.name} </label>
 			</#list>
 			</span>
 		</td>
 	</tr>
-	<@p.td colspan="2"><@p.submit code="global.submit" onclick="Cms.add();"/></@p.td>
+	<@p.td colspan="2"><@p.submit code="global.submit" onclick="Cms.addBack('list.rk?id=${id}');"/></@p.td>
 </@p.form>
 </div>
 </body>

@@ -13,10 +13,10 @@ function getTableForm() {
 <body>
 <div class="box-positon">
 	<div class="rpos"><@s.m "global.position"/>: 菜系 - <@s.m "global.list"/></div>
-	<@p.form class="ropt">
+	<form class="ropt">
 		<@p.hidden name="id" value="${id}"/>
 		<input class="add" type="submit" value="<@s.m "global.add"/>" onclick="this.form.action='add';"/>
-	</@p.form>
+	</form>
 	<div class="clear"></div>
 </div>
 <div class="body-box">
@@ -27,7 +27,9 @@ function getTableForm() {
 		<@p.column title="ID" align="center">${i+1}</@p.column><#t/>
 		<@p.column title="菜系" align="center">${tradingstore.name}</@p.column><#t/>
 		<@p.column code="admin.common.handle" align="center"><a href="edit.rk?id=${tradingstore.id}">[<@s.m "admin.common.edit" />]</@p.column><#t/>	
-		<@p.column title="分店管理" align="center"><a href="edit.rk?id=${tradingstore.id}">[<@s.m "admin.common.add" />]</@p.column><#t/>	
+		<@shiro.hasPermission name="admin.hm:tradingstore:delete">
+		<@p.column title="删除" align="center"><a href="javascript:void(0)" onclick="Cms.deleted('${tradingstore.id}')" class="pn-opt">[<@s.m "global.delete" />]</a></@p.column><#t/>	
+		</@shiro.hasPermission>
 		<#t/>
 	</@p.table>
 </@p.form>

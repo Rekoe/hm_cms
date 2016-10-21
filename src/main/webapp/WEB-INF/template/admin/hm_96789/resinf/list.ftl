@@ -24,7 +24,7 @@ function getTableForm() {
 			<@p.column title="ID" align="center">${i+1}</@p.column><#t/>
 			<@p.column title="菜系" align="center">${resinf.name}</@p.column><#t/>
 			<@p.column code="admin.common.handle" align="center"><a href="edit.rk?id=${resinf.id}">[<@s.m "admin.common.edit" />]</@p.column><#t/>	
-			<@p.column title="分店管理" align="center"><a href="${base}/admin/hm/tradingstore/list.rk?id=${resinf.id}">[<@s.m "admin.common.add" />]</@p.column><#t/>	
+			<@p.column title="分店管理" align="center"><a href="${base}/admin/hm/tradingstore/list.rk?id=${resinf.id}">[<@s.m "global.add" />]</@p.column><#t/>	
 			<#t/>
 		</@p.table>
 	</@p.form>
