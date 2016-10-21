@@ -1,23 +1,9 @@
 var ioc = {
-	platformEditDirective : {
-		type : "com.rekoe.web.freemarker.PlatformEditDirective",
-		events : {
-			create : "init",
-		}
-	},
 	shiroTags : {
 		type : "com.rekoe.shiro.freemarker.ShiroTags"
 	},
 	permissionResolver : {
 		type : "org.apache.shiro.authz.permission.WildcardPermissionResolver"
-	},
-	articleList : {
-		type : "com.rekoe.web.freemarker.ArticleListDirective",
-		args : [ {
-			refer : "articleService"
-		}, {
-			refer : "articleCategoryService"
-		} ]
 	},
 	permissionShiro : {
 		type : "com.rekoe.web.freemarker.PermissionShiroFreemarker",
@@ -45,12 +31,6 @@ var ioc = {
 	},
 	platformPermission : {
 		type : "com.rekoe.web.freemarker.PlatformPermissionDirective"
-	},
-	articleCategoryTree : {
-		type : "com.rekoe.web.freemarker.ArticleCategoryTreeDirective",
-		args : [ {
-			refer : "articleCategoryService"
-		} ]
 	},
 	mapTags : {
 		factory : "$freeMarkerConfigurer#addTags",
@@ -81,15 +61,6 @@ var ioc = {
 			},
 			'currentTime' : {
 				refer : 'currentTime'
-			},
-			'platform_edit' : {
-				refer : 'platformEditDirective'
-			},
-			'article_category_tree' : {
-				refer : 'articleCategoryTree'
-			},
-			'art_list' : {
-				refer : 'articleList'
 			}
 		} ]
 	}
