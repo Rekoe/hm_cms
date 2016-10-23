@@ -22,7 +22,7 @@ import com.rekoe.service.HMCuisineService;
  * 菜系
  * 
  * @author kouxian
- *
+ *http://www.runoob.com/jqueryui/example-autocomplete.html
  */
 @IocBean
 @At("/admin/hm/cuisine")
@@ -44,12 +44,6 @@ public class AdminHMCuisineAct {
 	public void add() {
 	}
 
-	/**
-	 * <@p.submit code="global.submit" onclick="Cms.update();"/>
-	 * @param cuisine
-	 * @param req
-	 * @return
-	 */
 	@At
 	@Ok("json")
 	@RequiresPermissions(value = "admin.hm:cuisine:add")

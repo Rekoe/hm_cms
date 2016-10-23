@@ -14,7 +14,7 @@ public class FrameAct {
 	public void userLeft() {
 	}
 
-	@At({ "account/main", "article/main", "crawler/main", "bind/main", "pwd/main" , "hm/main"})
+	@At({ "account/main", "pwd/main", "hm/main", "user/main" })
 	@Ok("fm:template.admin.common.main")
 	public void main() {
 
@@ -23,25 +23,6 @@ public class FrameAct {
 	@At("account/left")
 	@Ok("fm:template.admin.account.frame.left")
 	public void accountPwdLeft() {
-	}
-
-	@At("article/left")
-	@Ok("fm:template.admin.article.frame.left")
-	public void article_left() {
-	}
-
-	@At("crawler/left")
-	@Ok("fm:template.admin.crawler.frame.left")
-	public void crawler_left() {
-	}
-
-	/**
-	 * 账号绑定
-	 * 
-	 */
-	@At("bind/left")
-	@Ok("fm:template.admin.bind.frame.left")
-	public void bind_left() {
 	}
 
 	/*
@@ -55,6 +36,5 @@ public class FrameAct {
 	@At("hm/left")
 	@Ok("fm:template.admin.hm_96789.frame.left")
 	public void hmLeft() {
-
 	}
 }
