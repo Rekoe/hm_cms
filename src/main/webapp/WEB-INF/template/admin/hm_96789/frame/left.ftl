@@ -17,7 +17,7 @@ h3{ padding:0; margin:0; font-weight:normal; font-size:12px;}
 <div class="left">
 <#include "/template/admin/date.ftl"/>
 	<ul class="w-lful"><li><@s.m "global.admin.index"/></li></ul>
-	<@perm_chow perm="admin.hm:business">
+	<@perm_chow perm="admin.hm:resinf">
 	<h3>店鋪管理</h3>
 	<div style="margin:0; padding:0;">
 		<div class="leftmenuBG"><a href="${base}/admin/hm/resinf/list.rk" target="rightFrame">店鋪列表</a></div>
@@ -27,6 +27,12 @@ h3{ padding:0; margin:0; font-weight:normal; font-size:12px;}
 	<h3>惠民菜系管理</h3>
 	<div style="margin:0; padding:0;">
 		<div class="leftmenuBG"><a href="${base}/admin/hm/cuisine/list.rk" target="rightFrame">菜系列表</a></div>
+	</div>
+	</@perm_chow>
+	<@perm_chow perm="admin.hm:tradingstore:build">
+	<h3>系统设置</h3>
+	<div style="margin:0; padding:0;">
+		<div class="leftmenuBG"><a href="${base}/admin/hm/tradingStore/build.rk" target="rightFrame">构建索引</a></div>
 	</div>
 	</@perm_chow>
 </div>

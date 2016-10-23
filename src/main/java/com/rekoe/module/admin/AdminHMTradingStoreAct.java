@@ -1,24 +1,37 @@
 package com.rekoe.module.admin;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.nutz.dao.Cnd;
+import org.nutz.dao.Dao;
 import org.nutz.integration.shiro.annotation.NutzRequiresPermissions;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Lang;
+import org.nutz.lang.Strings;
+import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.At;
+import org.nutz.mvc.annotation.GET;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
+import org.nutz.mvc.view.ForwardView;
+import org.nutz.mvc.view.UTF8JsonView;
+import org.nutz.mvc.view.ViewWrapper;
 
 import com.rekoe.common.Message;
 import com.rekoe.common.page.Pagination;
 import com.rekoe.domain.HMRestaurantInfo;
 import com.rekoe.domain.HMTradingStore;
+import com.rekoe.lucene.LuceneSearchResult;
 import com.rekoe.service.HMRestaurantInfoService;
 import com.rekoe.service.HMTradingStoreService;
+import com.rekoe.service.OrderSearchService;
 
 @IocBean
 @At("/admin/hm/tradingstore")
@@ -73,4 +86,36 @@ public class AdminHMTradingStoreAct {
 		hmTradingStoreService.delete(id);
 		return Message.success("ok", req);
 	}
+
+	@At
+	@Ok("json")
+	@NutzRequiresPermissions(value = "admin.hm:tradingstore:build", name = "构建索引", tag = "商户商圈", enable = true)
+	public Message build(HttpServletRequest req) throws IOException {
+		orderSearchService.rebuild();
+		return Message.success("ok", req);
+	}
+
+	@Inject
+	private OrderSearchService orderSearchService;
+
+	@Inject
+	protected Dao dao;
+
+	@GET
+	@At
+	@Ok("json")
+	public Object search(@Param("q") String keys) throws Exception {
+		if (Strings.isBlank(keys))
+			return new ForwardView("/yvr/list");
+		List<LuceneSearchResult> results = orderSearchService.search(keys, 5);
+		List<HMTradingStore> list = new ArrayList<HMTradingStore>();
+		for (LuceneSearchResult result : results) {
+			HMTradingStore topic = dao.fetch(HMTradingStore.class, result.getId());
+			if (topic == null)
+				continue;
+			list.add(topic);
+		}
+		return new ViewWrapper(new UTF8JsonView(), new NutMap().setv("suggestions", list));
+	}
+
 }

@@ -25,9 +25,12 @@ import org.nutz.dao.sql.Sql;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Files;
+import org.nutz.lang.Lang;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 
+import com.rekoe.domain.HMCuisine;
+import com.rekoe.domain.HMTradingStore;
 import com.rekoe.lucene.LuceneSearchResult;
 
 @IocBean(create = "init", depose = "close")
@@ -38,25 +41,29 @@ public class OrderSearchService {
 
 	private static Log log = Logs.get();
 
-	@Inject("java:$conf.get('topic.lucene.dir')")
+	@Inject("java:$conf.get('tradingStore.lucene.dir')")
 	private String indexDir;
 
 	protected com.rekoe.lucene.LuceneIndex luceneIndex;
 
 	public void rebuild() throws IOException {
-		Sql sql = Sqls.queryString("select id from t_topic where tp='ask' or tp='share'");
+		Sql sql = Sqls.queryString("select * from hm_trading_store");
+		sql.setEntity(dao.getEntity(HMTradingStore.class));
+		sql.setCallback(Sqls.callback.entities());
 		dao.execute(sql);
 		luceneIndex.writer.deleteAll();
-		String[] topicIds = sql.getObject(String[].class);
-		for (String topicId : topicIds) {
-			// Topic topic = dao.fetch(Topic.class, topicId);
-			// bigContentService.fill(topic);
-			// _add(topic);
+		List<HMTradingStore> tradingStores = sql.getList(HMTradingStore.class);
+		for (HMTradingStore tradingStore : tradingStores) {
+			tradingStore = dao.fetchLinks(tradingStore, null);
+			if (tradingStore.getRestaurantInfo() == null) {
+				continue;
+			}
+			_add(tradingStore);
 		}
 		luceneIndex.writer.commit();
 	}
 
-	protected void _add(Object topic) {
+	protected void _add(HMTradingStore tradingStore) {
 		Document document;
 		document = new Document();
 		FieldType fieldType = new FieldType();
@@ -66,7 +73,7 @@ public class OrderSearchService {
 		fieldType.setTokenized(true);
 		fieldType.setStoreTermVectorPositions(true);// 存储位置
 		fieldType.setStoreTermVectorOffsets(true);// 存储偏移量
-		Field field = new Field("id", "getId()", fieldType);
+		Field field = new Field("id", tradingStore.getId() + "", fieldType);
 		document.add(field);
 
 		// 加入标题
@@ -77,7 +84,7 @@ public class OrderSearchService {
 		fieldType.setTokenized(true);
 		fieldType.setStoreTermVectorPositions(true);// 存储位置
 		fieldType.setStoreTermVectorOffsets(true);// 存储偏移量
-		field = new Field("title", "getTitle()", fieldType);
+		field = new Field("name", tradingStore.getName(), fieldType);
 		document.add(field);
 
 		// 加入文章内容
@@ -88,18 +95,16 @@ public class OrderSearchService {
 		fieldType.setTokenized(true);
 		fieldType.setStoreTermVectorPositions(true);// 存储位置
 		fieldType.setStoreTermVectorOffsets(true);// 存储偏移量
-		field = new Field("content", "getContent()", fieldType);
+		field = new Field("restaurant", tradingStore.getRestaurantInfo().getName(), fieldType);
 		document.add(field);
 
 		StringBuilder sb = new StringBuilder();
-		/*
-		 * if (topic.getReplies() != null) { for (TopicReply reply :
-		 * topic.getReplies()) { if (reply == null) continue;
-		 * bigContentService.fill(reply); if (reply.getContent() != null) { if
-		 * (sb.length()+reply.getContent().length() >
-		 * (IndexWriter.MAX_TERM_LENGTH/4)) { break; }
-		 * sb.append(reply.getContent()); } } }
-		 */
+		if (!Lang.isEmpty(tradingStore.getCuisines())) {
+			for (HMCuisine cuisine : tradingStore.getCuisines()) {
+				sb.append(cuisine.getName());
+			}
+		}
+
 		fieldType = new FieldType();
 		fieldType.setIndexed(true);// 索引
 		fieldType.setStored(false);// 存储
@@ -108,23 +113,23 @@ public class OrderSearchService {
 		fieldType.setStoreTermVectorPositions(true);// 存储位置
 		fieldType.setStoreTermVectorOffsets(true);// 存储偏移量
 
-		field = new Field("reply", sb.toString(), fieldType);
+		field = new Field("cuisine", sb.toString(), fieldType);
 		document.add(field);
 
 		try {
 			luceneIndex.writer.addDocument(document);
 		} catch (IOException e) {
-			log.debug("add to index fail : id= topic.getId()");
+			log.debug("add to index fail : id = " + tradingStore.getId());
 		} catch (Error e) {
-			log.debug("add to index fail : id= topic.getId()");
+			log.debug("add to index fail : id = " + tradingStore.getId());
 		}
 	}
 
 	Map<String, Float> boosts = new HashMap<>();
 	{
-		boosts.put("title", 5.0f);
-		boosts.put("content", 3.0f);
-		boosts.put("reply", 2.0f);
+		boosts.put("cuisine", 5.0f);
+		boosts.put("restaurant", 3.0f);
+		boosts.put("name", 2.0f);
 	}
 	String[] fields = boosts.keySet().toArray(new String[boosts.size()]);
 
@@ -140,7 +145,7 @@ public class OrderSearchService {
 			List<LuceneSearchResult> searchResults = new ArrayList<LuceneSearchResult>();
 			for (ScoreDoc sd : results.scoreDocs) {
 				String id = searcher.doc(sd.doc).get("id");
-				searchResults.add(new LuceneSearchResult(id, searcher.doc(sd.doc).get("title")));
+				searchResults.add(new LuceneSearchResult(id, searcher.doc(sd.doc).get("name")));
 			}
 			return searchResults;
 		} finally {
