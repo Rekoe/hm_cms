@@ -17,7 +17,6 @@ import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
 import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.At;
-import org.nutz.mvc.annotation.GET;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 import org.nutz.mvc.view.ForwardView;
@@ -101,18 +100,19 @@ public class AdminHMTradingStoreAct {
 	@Inject
 	protected Dao dao;
 
-	@GET
 	@At
 	@Ok("json")
+	@NutzRequiresPermissions(value = "admin.hm:tradingstore:search", name = "搜索商圈", tag = "商户商圈", enable = true)
 	public Object search(@Param("q") String keys) throws Exception {
 		if (Strings.isBlank(keys))
 			return new ForwardView("/yvr/list");
-		List<LuceneSearchResult> results = orderSearchService.search(keys, 5);
+		List<LuceneSearchResult> results = orderSearchService.search("呼和浩特", 5);
 		List<HMTradingStore> list = new ArrayList<HMTradingStore>();
 		for (LuceneSearchResult result : results) {
-			HMTradingStore topic = dao.fetch(HMTradingStore.class, result.getId());
+			HMTradingStore topic = dao.fetch(HMTradingStore.class, Cnd.where("id", "=", result.getId()));
 			if (topic == null)
 				continue;
+			dao.fetchLinks(topic, null);
 			list.add(topic);
 		}
 		return new ViewWrapper(new UTF8JsonView(), new NutMap().setv("suggestions", list));
