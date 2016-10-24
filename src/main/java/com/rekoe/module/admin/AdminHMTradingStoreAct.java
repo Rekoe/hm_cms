@@ -100,16 +100,6 @@ public class AdminHMTradingStoreAct {
 	@Inject
 	protected Dao dao;
 
-	/**
-	 * 
-	 jQuery16021239565695298146_1477282495652({"info":[{"id":"peter",
-	 * "label":"peter", "value":"3734"} ,{"id" :"terry", "label":"terry",
-	 * "value":"3730"} ]})
-	 * 
-	 * @param keys
-	 * @return
-	 * @throws Exception
-	 */
 	@At
 	@Ok("json")
 	@NutzRequiresPermissions(value = "admin.hm:tradingstore:search", name = "搜索商圈", tag = "商户商圈", enable = true)
@@ -124,12 +114,8 @@ public class AdminHMTradingStoreAct {
 			if (topic == null)
 				continue;
 			dao.fetchLinks(topic, null);
-			// list.add(topic);
+			list.add(new Info(topic.getName(), topic.getRestaurantInfo().getName(), topic.getId() + ""));
 		}
-		list.add(new Info("peter", "peterLabel", "3734"));
-		list.add(new Info("terry", "terryLabel", "3730"));
-		// return new ViewWrapper(new UTF8JsonView(), new
-		// NutMap().setv("suggestions", list));
 		return new ViewWrapper(new UTF8JsonView(), new NutMap().setv("info", list));
 	}
 

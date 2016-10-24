@@ -42,9 +42,7 @@
             },
             minLength: 2,
             select: function( event, ui ) {
-                log( ui.item ?
-                    ui.item.label + " ext. " + ui.item.value:
-                    "Nothing found");
+                log( ui.item ? ui.item.label + " ext. " + ui.item.value: "Nothing found");
             },
             open: function() {
                 $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
@@ -53,11 +51,8 @@
                 $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
             }
     })
-    .data( "autocomplete" )._renderItem = function( ul, item ) {
-            return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a>" + item.label + "&nbsp;ext.&nbsp;" + item.value + "</a>" )
-                .appendTo( ul );
+    .data("autocomplete" )._renderItem = function( ul, item ) {
+          return $("<li></li>" ).data( "item.autocomplete", item ).append( "<a>" + item.label + "&nbsp;ext.&nbsp;" + item.value + "</a>" ).appendTo( ul );
     };
 });
   function log( message ) {
@@ -78,7 +73,7 @@
 	  <input id="city"> 
     </div>
   	<div class="ui-widget" style="margin-top:2em; font-family:Arial">
-	  结果： <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+	  结果： <div id="log" style="height: 200px; width: 80%; overflow: auto;" class="ui-widget-content"></div>
   	</div>
 </div>
 </body>
