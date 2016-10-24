@@ -4,9 +4,16 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>搜索菜系 - Powered By Rekoe Cms</title>
 <#include "/template/admin/head.ftl" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
 <style>
+	body {
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	table {
+		font-size: 1em;
+	}
+	.ui-draggable, .ui-droppable {
+		background-position: top;
+	}
   .ui-autocomplete-loading {
     background: white url('${base}/res/common/images/ui-anim_basic_16x16.gif') right center no-repeat;
   }
