@@ -33,6 +33,7 @@ h3{ padding:0; margin:0; font-weight:normal; font-size:12px;}
 	<h3>系统设置</h3>
 	<div style="margin:0; padding:0;">
 		<div class="leftmenuBG"><a href="${base}/admin/hm/tradingStore/build.rk" target="rightFrame">构建索引</a></div>
+		<div class="leftmenuBG"><a href="${base}/admin/hm/tradingStore/m_s.rk" target="rightFrame">搜索</a></div>
 	</div>
 	</@perm_chow>
 </div>

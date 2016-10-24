@@ -101,7 +101,7 @@ public class AdminHMTradingStoreAct {
 	protected Dao dao;
 
 	@At
-	@Ok("json")
+	@Ok("jsonp")
 	@NutzRequiresPermissions(value = "admin.hm:tradingstore:search", name = "搜索商圈", tag = "商户商圈", enable = true)
 	public Object search(@Param("q") String keys) throws Exception {
 		if (Strings.isBlank(keys))
@@ -118,4 +118,9 @@ public class AdminHMTradingStoreAct {
 		return new ViewWrapper(new UTF8JsonView(), new NutMap().setv("suggestions", list));
 	}
 
+	@At
+	@Ok("fm:template.admin.hm_96789.tradingstore.search")
+	@RequiresPermissions("admin.hm:tradingstore:search")
+	public void m_s() {
+	}
 }
