@@ -3,73 +3,83 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>搜索菜系 - Powered By Rekoe Cms</title>
+<#include "/template/admin/head.ftl" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
 <style>
   .ui-autocomplete-loading {
-    background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat;
+    background: white url('${base}/res/common/images/ui-anim_basic_16x16.gif') right center no-repeat;
   }
   #city { width: 25em; }
   </style>
 <script>
-  $(function() {
-    function log( message ) {
-      $( "<div>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
- 
+  $(document).ready(function(){    
     $( "#city" ).autocomplete({
-      source: function( request, response ) {
-        $.ajax({
-          url: "search.rk",
-          dataType: "jsonp",
-          data: {
-            featureClass: "P",
-            style: "full",
-            maxRows: 12,
-            q: request.term
-          },
-          success: function( data ) {
-            response( $.map( data.geonames, function( item ) {
-              return {
-                label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
-                value: item.name
-              }
-            }));
-          }
-        });
-      },
-      minLength: 2,
-      select: function( event, ui ) {
-        log( ui.item ? "Selected: " + ui.item.label : "Nothing selected, input was " + this.value);
-      },
-      open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-      },
-      close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-      }
-    });
-  });
+            source: function( request, response ) {
+                $.ajax({
+                    url: "search.rk",
+                    type:"post",
+                    dataType: "json",
+                    data: {
+                        q: request.term
+                    },
+                    success: function( data ) {
+                        //response([{id: data.id, label: data.label, value: data.value}]);
+                        response(
+                            $.map( data.info, function( item ) {
+                            return {
+                                label: item.id,
+                                value: item.value
+                            }
+                        }));
+                        
+                    }
+                });
+            },
+            focus: function( event, ui ) {
+                $( "#project" ).val( ui.item.label );
+                return false;
+            },
+            minLength: 2,
+            select: function( event, ui ) {
+                log( ui.item ?
+                    ui.item.label + " ext. " + ui.item.value:
+                    "Nothing found");
+            },
+            open: function() {
+                $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+            },
+            close: function() {
+                $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+            }
+    })
+    .data( "autocomplete" )._renderItem = function( ul, item ) {
+            return $( "<li></li>" )
+                .data( "item.autocomplete", item )
+                .append( "<a>" + item.label + "&nbsp;ext.&nbsp;" + item.value + "</a>" )
+                .appendTo( ul );
+    };
+});
+  function log( message ) {
+    $( "<div/>" ).text( message ).hide().prependTo( "#log" ).fadeIn('slow');
+    $("#log div").css({'background':'#555','margin':'1px 4px 1px 2px', 'padding':'5px 0px','color':'#E5E5E5'});
+    $( "#log" ).attr( "scrollTop", 0 );
+}
 </script>
 </head>
 <body>
 <div class="box-positon">
-	<div class="rpos"><@s.m "global.position"/>: 搜索惠民商家 </div>
-	<form class="ropt">
-		<input type="submit" value="<@s.m "global.backToList"/>" onclick="this.form.action='list.rk';" class="return-button"/>
-	</form>
+	<div class="rpos"><@s.m "global.position"/>: 惠民商家 - 搜索</div>
 	<div class="clear"></div>
 </div>
 <div class="body-box">
-<@p.form id="jvForm" action="search" labelWidth="10" method="post" onsubmit="return false;">
-	<div style="padding-top:5px; padding-bottom:5px; text-indent:10px; border-bottom:1px solid #fff; border-top:1px solid #fff;">
-		<label for="city">鸟：</label> <input type="text" name="city" value="" style="width:180px"/>
-	</div>
-	<@p.td colspan="2"><div class="ui-widget" style="margin-top:2em; font-family:Arial"> 结果：<div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div></div></@p.td>
-</@p.form>
+	<div class="ui-widget">
+	  <label for="city">需要搜索的数据：</label>
+	  <input id="city"> 
+    </div>
+  	<div class="ui-widget" style="margin-top:2em; font-family:Arial">
+	  结果： <div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+  	</div>
 </div>
 </body>
 </html>

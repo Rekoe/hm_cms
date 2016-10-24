@@ -145,7 +145,7 @@ public class OrderSearchService {
 			List<LuceneSearchResult> searchResults = new ArrayList<LuceneSearchResult>();
 			for (ScoreDoc sd : results.scoreDocs) {
 				String id = searcher.doc(sd.doc).get("id");
-				searchResults.add(new LuceneSearchResult(id, searcher.doc(sd.doc).get("name")));
+				searchResults.add(new LuceneSearchResult(new Long(id), searcher.doc(sd.doc).get("name")));
 			}
 			return searchResults;
 		} finally {

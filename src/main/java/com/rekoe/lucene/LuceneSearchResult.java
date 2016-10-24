@@ -2,21 +2,21 @@ package com.rekoe.lucene;
 
 public class LuceneSearchResult {
 
-	private String id;
+	private long id;
 	private String result;
 	
 	public LuceneSearchResult() {
 		super();
 	}
-	public LuceneSearchResult(String id, String result) {
+	public LuceneSearchResult(long id, String result) {
 		super();
 		this.id = id;
 		this.result = result;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getResult() {

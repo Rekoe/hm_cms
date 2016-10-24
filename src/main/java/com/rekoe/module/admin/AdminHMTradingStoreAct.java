@@ -100,22 +100,74 @@ public class AdminHMTradingStoreAct {
 	@Inject
 	protected Dao dao;
 
+	/**
+	 * 
+	 jQuery16021239565695298146_1477282495652({"info":[{"id":"peter",
+	 * "label":"peter", "value":"3734"} ,{"id" :"terry", "label":"terry",
+	 * "value":"3730"} ]})
+	 * 
+	 * @param keys
+	 * @return
+	 * @throws Exception
+	 */
 	@At
-	@Ok("jsonp")
+	@Ok("json")
 	@NutzRequiresPermissions(value = "admin.hm:tradingstore:search", name = "搜索商圈", tag = "商户商圈", enable = true)
 	public Object search(@Param("q") String keys) throws Exception {
 		if (Strings.isBlank(keys))
 			return new ForwardView("/yvr/list");
-		List<LuceneSearchResult> results = orderSearchService.search("呼和浩特", 5);
-		List<HMTradingStore> list = new ArrayList<HMTradingStore>();
+		System.out.println(keys);
+		List<LuceneSearchResult> results = orderSearchService.search(keys, 5);
+		List<Info> list = new ArrayList<Info>();
 		for (LuceneSearchResult result : results) {
 			HMTradingStore topic = dao.fetch(HMTradingStore.class, Cnd.where("id", "=", result.getId()));
 			if (topic == null)
 				continue;
 			dao.fetchLinks(topic, null);
-			list.add(topic);
+			// list.add(topic);
 		}
-		return new ViewWrapper(new UTF8JsonView(), new NutMap().setv("suggestions", list));
+		list.add(new Info("peter", "peterLabel", "3734"));
+		list.add(new Info("terry", "terryLabel", "3730"));
+		// return new ViewWrapper(new UTF8JsonView(), new
+		// NutMap().setv("suggestions", list));
+		return new ViewWrapper(new UTF8JsonView(), new NutMap().setv("info", list));
+	}
+
+	public class Info {
+		private String id;
+		private String label;
+		private String value;
+
+		public Info(String id, String label, String value) {
+			super();
+			this.id = id;
+			this.label = label;
+			this.value = value;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
+
+		public String getLabel() {
+			return label;
+		}
+
+		public void setLabel(String label) {
+			this.label = label;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String value) {
+			this.value = value;
+		}
 	}
 
 	@At
