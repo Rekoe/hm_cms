@@ -15,7 +15,7 @@ import org.nutz.dao.entity.annotation.Table;
  *
  */
 @Table("hm_reservation")
-public class Reservation implements Serializable {
+public class HMReservation implements Serializable {
 
 	private static final long serialVersionUID = 3847768969866910621L;
 

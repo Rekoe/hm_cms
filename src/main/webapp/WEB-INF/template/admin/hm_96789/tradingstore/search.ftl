@@ -4,6 +4,9 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>搜索菜系 - Powered By Rekoe Cms</title>
 <#include "/template/admin/head.ftl" />
+<#-- 
+https://my.oschina.net/zimingforever/blog/63877
+  -->
 <style>
 	body {
 		font-family: Arial, Helvetica, sans-serif;
@@ -82,6 +85,15 @@
   	<div class="ui-widget" style="margin-top:2em; font-family:Arial">
 	  结果： <div id="log" style="height: 200px; width: 80%; overflow: auto;" class="ui-widget-content"></div>
   	</div>
+<div id="sub">
+<@p.form id="jvForm" action="o_save" labelWidth="10" method="post" onsubmit="return false;">
+	<@p.text label="商圈" id="res.name" name="res.name" required="true" class="required" maxlength="40"/><@p.tr/>
+	<@p.text label="地址" id="res.addr" name="res.addr" required="true" class="required" maxlength="40"/><@p.tr/>
+	<@p.text label="电话" id="res.phone" name="res.phone" required="true" class="required" maxlength="40"/><@p.tr/>
+ 	<@p.textarea label="附近酒店" name="res.hotel" cols="50" rows="5" class="textbox required" />
+	<@p.td colspan="2"><@p.submit code="global.submit" onclick="Cms.addBack('list.rk');"/></@p.td>
+</@p.form>
+</div>
 </div>
 </body>
 </html>
