@@ -9,7 +9,7 @@
 <script src="${base}/res/common/js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
 <script src="${base}/res/common/js/jquery.ext.js" type="text/javascript"></script>
 <script src="${base}/res/common/js/pony.js" type="text/javascript"></script>
-<script src="${base}/res/cms/js/admin.js?2016090901" type="text/javascript"></script>
+<script src="${base}/res/cms/js/admin.js?2016102601" type="text/javascript"></script>
 <script src="${base}/res/common/js/base.js?201400623" type="text/javascript"></script>
 <script src="${base}/res/common/js/jquery.validate.js" type="text/javascript"></script>
 <script src="${base}/thirdparty/kindeditor4/kindeditor-min.js" type="text/javascript" ></script>

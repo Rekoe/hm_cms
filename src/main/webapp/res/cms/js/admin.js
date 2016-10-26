@@ -90,6 +90,32 @@ Cms.deleted = function(id){
 	}); 
 	return false;
 }
+Cms.addDef = function(action,url){
+	$.dialog({
+		type: "warn",
+		content: '确定要添加此记录?',
+		ok: 'Ok',
+		cancel: 'Cancel',
+		onOk: function() {
+			$.ajax({
+				url: action,
+				type: "POST",
+				data: $('#jvForm').serialize(),
+				dataType: "json",
+				cache: false,
+				success: function(message) {
+					$.message(message);
+					if (message.type == "success")
+					{
+						window.location.href = url;
+					}
+				}
+			});
+		}
+	}); 
+	return false;
+}
+
 Cms.addBack = function(url){
 	$.dialog({
 		type: "warn",

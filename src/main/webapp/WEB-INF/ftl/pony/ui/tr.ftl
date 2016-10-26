@@ -1,6 +1,6 @@
 <#--
 <tr></tr>
 -->
-<#macro tr>
-</tr><tr><#rt/>
+<#macro tr id="">
+</tr><tr<#if id!=""> id="${id}"</#if>><#rt/>
 </#macro>

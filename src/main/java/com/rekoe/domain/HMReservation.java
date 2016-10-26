@@ -3,6 +3,8 @@ package com.rekoe.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.nutz.dao.entity.annotation.ColDefine;
+import org.nutz.dao.entity.annotation.ColType;
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Id;
@@ -29,6 +31,7 @@ public class HMReservation implements Serializable {
 	private Date eatTim;
 
 	@Column(hump = true)
+	@ColDefine(type = ColType.TIMESTAMP)
 	private Date createTim;
 
 	@Comment("是否定雅间")
@@ -43,13 +46,18 @@ public class HMReservation implements Serializable {
 	@Column(hump = true)
 	private int roomNum;
 
-	@Comment("是否自带酒水")
-	@Column(hump = true)
-	private boolean needWine;
-
 	@Comment("联系电话")
 	@Column
-	private long phone;
+	private long phon;
+
+	@Column("s")
+	@Comment("状态")
+	private int status;
+
+	@Column(hump = true)
+	@Comment("订单ID")
+	@ColDefine(width = 64)
+	private long orderId;
 
 	public long getId() {
 		return id;
@@ -59,12 +67,28 @@ public class HMReservation implements Serializable {
 		this.id = id;
 	}
 
-	public long getPhone() {
-		return phone;
+	public long getOrderId() {
+		return orderId;
 	}
 
-	public void setPhone(long phone) {
-		this.phone = phone;
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public long getPhon() {
+		return phon;
+	}
+
+	public void setPhon(long phon) {
+		this.phon = phon;
 	}
 
 	public long getTradingStoreId() {
@@ -113,13 +137,5 @@ public class HMReservation implements Serializable {
 
 	public void setRoomNum(int roomNum) {
 		this.roomNum = roomNum;
-	}
-
-	public boolean isNeedWine() {
-		return needWine;
-	}
-
-	public void setNeedWine(boolean needWine) {
-		this.needWine = needWine;
 	}
 }

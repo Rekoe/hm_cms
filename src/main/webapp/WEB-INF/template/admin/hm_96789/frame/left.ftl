@@ -34,6 +34,7 @@ h3{ padding:0; margin:0; font-weight:normal; font-size:12px;}
 	<div style="margin:0; padding:0;">
 		<div class="leftmenuBG"><a href="${base}/admin/hm/tradingStore/build.rk" target="rightFrame">构建索引</a></div>
 		<div class="leftmenuBG"><a href="${base}/admin/hm/tradingStore/m_s.rk" target="rightFrame">搜索</a></div>
+		<div class="leftmenuBG"><a href="${base}/admin/hm/reservation/list.rk" target="rightFrame">订单列表</a></div>
 	</div>
 	</@perm_chow>
 </div>

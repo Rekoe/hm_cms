@@ -28,8 +28,8 @@ import org.nutz.mvc.Setup;
 import org.nutz.plugins.view.freemarker.FreeMarkerConfigurer;
 import org.quartz.Scheduler;
 
+import com.rekoe.domain.HMReservation;
 import com.rekoe.domain.User;
-import com.rekoe.domain.WebMobileBind;
 import com.rekoe.service.AuthorityService;
 
 import freemarker.template.Configuration;
@@ -52,7 +52,7 @@ public class MainSetup implements Setup {
 
 		// 为全部标注了@Table的bean建表
 		Daos.createTablesInPackage(dao, User.class.getPackage().getName(), false);
-		Daos.migration(dao, WebMobileBind.class, true, true, false);
+		Daos.migration(dao, HMReservation.class, true, true, false);
 		// 初始化默认根用户
 		if (0 == dao.count(User.class)) {
 			FileSqlManager fm = new FileSqlManager("init_system_h2.sql");
