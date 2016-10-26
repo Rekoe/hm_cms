@@ -14,3 +14,4 @@
 <script src="${base}/res/common/js/jquery.validate.js" type="text/javascript"></script>
 <script src="${base}/thirdparty/kindeditor4/kindeditor-min.js" type="text/javascript" ></script>
 <script src="${base}/thirdparty/kindeditor4/lang/zh_CN.js" type="text/javascript" ></script>
+<script src="${base}/thirdparty/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
